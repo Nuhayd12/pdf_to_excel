@@ -1,0 +1,312 @@
+.holographic-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #000;
+          }
+          
+          .holographic-card {
+            width: 300px;
+            height: 200px;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            transition: all 0.5s ease;
+          }
+          
+          .holographic-card h2 {
+            color: #0ff;
+            font-size: 2rem;
+            position: relative;
+            z-index: 2;
+          }
+          
+          .holographic-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+              0deg, 
+              transparent, 
+              transparent 30%, 
+              rgba(0,255,255,0.3)
+            );
+            transform: rotate(-45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+          }
+          
+          .holographic-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0,255,255,0.5);
+          }
+          
+          .holographic-card:hover::before {
+            opacity: 1;
+            transform: rotate(-45deg) translateY(100%);
+          }
+
+          #features {
+            background: #000000;
+            color: white;
+            font-size: 16px;
+            font-family: 'Chivo', sans-serif;
+            font-weight: 300;
+        }
+
+        #features h2 {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        #timeline-content {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        /* Timeline */
+
+        .timeline {
+            border-left: 4px solid #00FF7F;
+            border-bottom-right-radius: 4px;
+            border-top-right-radius: 4px;
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.8);
+            margin: 50px auto;
+            letter-spacing: 0.5px;
+            position: relative;
+            line-height: 1.4em;
+            font-size: 1.03em;
+            padding: 50px;
+            list-style: none;
+            text-align: left;
+            font-weight: 100;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .timeline h1 {
+            font-family: 'Saira', sans-serif;
+            letter-spacing: 1.5px;
+            font-weight: 100;
+            font-size: 1.4em;
+        }
+
+        .timeline h2,
+        .timeline h3 {
+            font-family: 'Saira', sans-serif;
+            letter-spacing: 1.5px;
+            font-weight: 400;
+            font-size: 1.4em;
+        }
+
+        .timeline .event {
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-bottom: 25px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline .event:last-of-type {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border: none;
+        }
+
+        .timeline .event:before,
+        .timeline .event:after {
+            position: absolute;
+            display: block;
+            top: 0;
+        }
+
+        .timeline .event:before {
+            left: -180px;
+            color: rgba(255, 255, 255, 0.4);
+            content: attr(data-date);
+            text-align: right;
+            font-weight: 100;
+            font-size: 0.9em;
+            min-width: 120px;
+            font-family: 'Saira', sans-serif;
+        }
+
+        .timeline .event:after {
+            box-shadow: 0 0 0 4px #3af343;
+            left: -30px;
+            background: #2a2d2c;
+            border-radius: 50%;
+            height: 11px;
+            width: 11px;
+            content: "";
+            top: 5px;
+        }
+
+        <div class="bg-lime-400 rounded-lg p-6 w-64 h-64 flex flex-col items-center justify-center">
+        <p class="text-lg font-semibold text-gray-800 mb-4 text-center">Excel to PPT</p>
+        <a href="3EXCEL_PPT.html"
+            class="inline-flex items-center justify-center rounded-full border border-transparent bg-gray-800 px-6 py-2 text-sm font-medium text-white hover:bg-gray-700">Convert</a>
+    </div>
+    <div class="bg-lime-400 rounded-lg p-6 w-64 h-64 flex flex-col items-center justify-center">
+        <p class="text-lg font-semibold text-gray-800 mb-4 text-center">Excel to Word</p>
+        <a href="3EXCEL_WORD.html"
+            class="inline-flex items-center justify-center rounded-full border border-transparent bg-gray-800 px-6 py-2 text-sm font-medium text-white hover:bg-gray-700">Convert</a>
+    </div>
+
+            /* Animation for horizontal scrolling */
+        @keyframes scrollLeft {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .animate-scroll-left {
+            animation: scrollLeft 12s linear infinite;
+            /* Increased speed */
+            min-width: fit-content;
+            display: inline-flex;
+            /* Added for correct positioning */
+        }
+
+
+
+    side scroll animation
+
+    <h1>Scroll ⟵ left and right ⟶ to view</h1>
+<ul>
+  <li> <img src="https://source.unsplash.com/ezSFnAFi9hY/500x500" alt="cut citrus fruits. " />Lorem Ipsum</li>
+  <li> <img src="https://source.unsplash.com/TIGDsyy0TK4/500x500" alt="sliced mango. " />Dolor Sit</li>
+  <li> <img src="https://source.unsplash.com/TdDtTu2rv4s/500x500" alt="a bunch of blueberries. " />Amet Consectetur</li>
+  <li> <img src="https://source.unsplash.com/eudGUrDdBB0/500x500" alt="a pineapple sitting on a table. " />Adipiscing Elit</li>
+  <li> <img src="https://source.unsplash.com/eJH4f1rlG7g/500x500" alt="frozen raspberries. " /> Nunc Tortor</li>
+  <li> <img src="https://source.unsplash.com/24RUrLSW1HI/500x500" alt="a sliced strawberry. " />Metus Mollis</li>
+  <li> <img src="https://source.unsplash.com/h5yMpgOI5nI/500x500" alt="an arrangement of assorted sliced fruits. " />Congue Sagittis</li>
+  <li> <img src="https://source.unsplash.com/2TYrR2IB72s/500x500" alt="sliced watermelons. " />Vestibulum Et</li>
+  <li> <img src="https://source.unsplash.com/1cWZgnBhZRs/500x500" alt="grapefruits, lemons, and pomegranates. " />Donec Eget</li>
+  <li> <img src="https://source.unsplash.com/9aOswReDKPo/500x500" alt="half of an avocado. " />Maecenas et Justo</li>
+  <li> <img src="https://source.unsplash.com/Nl7eLS8E2Ss/500x500" alt="half of a lime. " />Malesuada Quam</li>
+  <li> <img src="https://source.unsplash.com/3HhXWJzG5Ko/500x500" alt="a single cherry with stem. " />Ultricies Sollicitudin</li>
+  <li> <img src="https://source.unsplash.com/fczCr7MdE7U/500x500" alt="a bunch of bananas. " />Gravida Nibh</li>
+  <li> <img src="https://source.unsplash.com/uI900SItAyY/500x500" alt="three pears. " />Pellentesque Sapien</li>
+  <li> <img src="https://source.unsplash.com/0AynZdszfz0/500x500" alt="a basket full of peaches next to a plate with sliced peaches. " />Suspendisse Vel</li>
+  <li> <img src="https://source.unsplash.com/C6JhUKs9q8M/500x500" alt="a bowl of avocados. " />Mauris Consectetur</li>
+</ul>
+
+
+css side scroll:
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+*,
+body,
+html {
+  &::-webkit-scrollbar {
+    background-color: #1e1f26;
+    height: 20px;
+    width: 20px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #383d4d;
+    border-radius: 99em;
+    border: 6px solid #1e1f26;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: clamp(20px, 2.5vw, 36px);
+  color: rgba(#fff, 0.8);
+  font-weight: 600;
+  text-align: center;
+}
+
+img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  display: block;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: center;
+  scroll-behavior: smooth;
+}
+
+li {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  width: min(50vw, 350px);
+  display: inline-block;
+  text-align: center;
+  background-color: #16171f;
+  color: #9b9dad;
+  padding-bottom: 1.5rem;
+  font-size: clamp(18px, 2.5vw, 22px);
+  box-shadow: -10px 0 30px 0 rgba(#000, 0.25);
+  margin-left: -4px;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #1e1f26;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+    <section id="why">
+        <h2 class="h2">4 <span class="circle-effect">Reasons</span> Why You Should Use Beyond Excel</h2>
+        <div class="why-beyond-excel">
+            <div class="why-container">
+                <div class="why-card">
+                    <h2><span class="why-number">1</span></h2>
+                </div>
+                <div class="why-card">
+                    <h2><span class="why-number">2</span></h2>
+                </div>
+                <div class="why-card">
+                    <h2><span class="why-number">3</span></h2>
+                </div>
+                <div class="why-card">
+                    <h2><span class="why-number">4</span></h2>
+                </div>
+            </div>
+        </section>
+
+                        <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>

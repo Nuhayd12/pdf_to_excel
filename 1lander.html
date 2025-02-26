@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond Excel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+    <style>
+        /* Import */
+
+        @import url('https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i|Saira+Extra+Condensed:100,200,300,400,500,600,700,800|Saira:100,200,300,400,500,600,700,800');
+        @import url("https://fonts.googleapis.com/css?family=Varela+Round");
+
+        #myBtn {
+            /* Modified to use the arrow class */
+            width: 2vmin;
+            height: 2vmin;
+            box-sizing: border-box;
+            position: fixed;
+            /* Keep fixed */
+            bottom: 20px;
+            right: 30px;
+            transform: rotate(-45deg);
+            z-index: 99;
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            display: none;
+            /* Hidden by default */
+        }
+
+        #myBtn::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            border-width: .8vmin .8vmin 0 0;
+            border-style: solid;
+            border-color: #39e75f;
+            transition: .2s ease;
+            display: block;
+            transform-origin: 100% 0;
+        }
+
+        #myBtn::after {
+            content: '';
+            float: left;
+            position: relative;
+            top: -100%;
+            width: 100%;
+            height: 100%;
+            border-width: 0 .8vmin 0 0;
+            border-style: solid;
+            border-color: #39e75f;
+            transform-origin: 100% 0;
+            transition: .2s ease;
+        }
+
+        html {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            width: 100%; 
+            height: 100%;
+            background: radial-gradient(circle at center, rgb(43, 40, 40), #180c04  ); ;
+            font-family: 'Montserrat', sans-serif;
+            --x: 0; /*extra*/
+            --y: 0; /*extra*/
+            cursor: none; /*extra*/
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=') 0 0, none;
+        /*extra*/}
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            /* Allow wrapping on smaller screens */
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 24px;
+            margin-left: -120px;
+            margin-right: 150px;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 900;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            flex-wrap: wrap;
+            /* Allow navigation items to wrap */
+        }
+
+        nav ul li {
+            width: auto;
+            height: 50px;
+            transition: background-position-x 0.9s linear;
+            text-align: center;
+            margin: 5px 15px;
+            /* Reduce space between nav items */
+        }
+
+        nav ul li a {
+            font-size: 22px;
+            color: #777;
+            text-decoration: none;
+            transition: all 0.45s;
+            display: block;
+            width: 100%;
+            height: 100%;
+            line-height: 50px;
+            padding: 0 10px;
+            /* Add padding to nav links */
+        }
+
+        nav ul li:hover {
+            background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsYW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjM5MHB4IiBoZWlnaHQ9IjUwcHgiIHZpZXdCb3g9IjAgMCAzOTAgNTAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDM5MCA1MCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDk0ZjVjIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBkPSJNMCw0Ny41ODVjMCwwLDk3LjUsMCwxMzAsMGMxMy43NSwwLDI4Ljc0LTM4Ljc3OCw0Ni4xNjgtMTkuNDE2QzE5Mi42NjksNDYuNSwyNDMuNjAzLDQ3LjU4NSwyNjAsNDcuNTg1YzMxLjgyMSwwLDEzMCwwLDEzMCwwIi8+PC9zdmc+");
+            animation: line 1s;
+        }
+
+        nav ul li:hover a {
+            color: #39e75f;
+        }
+
+        nav ul li:not(:last-child) {
+            margin-right: 30px;
+        }
+
+        @keyframes line {
+            0% {
+                background-position-x: 390px;
+            }
+        }
+
+        .get-start {
+            background: linear-gradient(135deg, #06b6d4, #a855f7);
+            color: white;
+            border: none;
+            font-weight: bolder;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            white-space: nowrap;
+            margin-left: 120px;
+            margin-right: -150px;
+
+        }
+
+        .get-start:hover {
+            background: linear-gradient(135deg, black, black);
+        }
+
+        .section {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .trust-us {
+            padding: 80px 20px; /* Increased padding for overall section */
+            text-align: center;
+        }
+        
+        .trust-us .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .trust-us h2 {
+            font-size: 2.5em;
+            margin-bottom: 60px; /* Increased margin below title */
+            color: white;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 800;
+        }
+        
+        .feature-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 200px; /* Increased margin between rows */
+            text-align: left;
+        }
+        
+        /* Remove margin from the last row */
+        .feature-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .feature-image {
+            flex: 0 0 400px;
+            margin-left: 30px;
+        }
+        
+        .feature-image img {
+            width: 400px;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        .feature-content {
+            flex: 1;
+            font-size: 1.1em;
+            line-height: 2.0;
+            color: white;
+        }
+        
+        .feature-content h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .feature-content p {
+            margin-bottom: 20px;
+        }
+        
+        .feature-content a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        /* Specific styling for each row */
+        .feature-row-1 {
+            flex-direction: row; /* Image on left, description on right */
+        }
+        
+        .feature-row-2 {
+            flex-direction: row; /* Image on right, description on left */
+        }
+        
+        .feature-row-3 {
+            flex-direction: row; /* Image on left, description on right */
+        }
+        
+        /* Adjust margins for the second row */
+        .feature-row-2 .feature-image {
+            margin-left: 0;
+            margin-right: 30px;
+        }
+
+        .footer {
+            background: #1a1313;
+            padding: 50px 0;
+        }
+
+        .footer .social-icons {
+            display: flex;
+            margin-top: 20px;
+            justify-content: flex-start; /* Align icons to the start (left) */
+            align-items: center; /* Center icons vertically */
+        }
+        
+        .footer .social-icons li {
+            list-style: none;
+            margin: 0 8px; /* Maintain spacing between icons */
+        }
+        
+        .footer .social-icons li a {
+            width: 40px; /* Reduced width for better fit */
+            height: 40px; /* Reduced height for better fit */
+            line-height: 40px; /* Adjusted line-height to match height */
+            font-size: 20px; /* Reduced font-size for better fit */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center icon horizontally */
+            align-items: center; /* Center icon vertically */
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #fff;
+            z-index: 1;
+        }
+        
+        .footer .social-icons li a .icon {
+            position: relative;
+            color: white;
+            transition: .5s;
+            z-index: 3;
+        }
+        
+        .footer .social-icons li a:hover .icon {
+            color: #fff;
+            transform: rotateY(360deg);
+        }
+        
+        .footer .social-icons li a:before {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f00;
+            transition: .5s;
+            z-index: 2;
+        }
+        
+        .footer .social-icons li a:hover:before {
+            top: 0;
+        }
+        
+        .footer .social-icons li:nth-child(1) a:before {
+            background: #3b5999;
+        }
+        
+        .footer .social-icons li:nth-child(2) a:before {
+            background: #55acee;
+        }
+        
+        .footer .social-icons li:nth-child(3) a:before {
+            background: #0077b5;
+        }
+        
+        .footer .social-icons li:nth-child(4) a:before {
+            background: #dd4b39;
+        }
+
+        .subscribe-input {
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            width: 100%;
+            color: black;
+        }
+
+        .subscribe-button {
+            background: #39e75f;
+            color: black;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .subscribe-button:hover {
+            background: #1e293b;
+            color: white;
+        }
+
+
+
+        #faqs h2{
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            font-weight: 900;
+        }
+
+        /* Custom CSS for FAQ Toggle (Tailwind CSS Structure) */
+        .faq-toggle:checked+label+.faq-answer {
+            display: block;
+        }
+
+        /* Hidden state */
+        label {
+            display: fex;
+            align-items: left;
+            justify-content: space-between;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        label span {
+            flex: 1;
+            /* Makes sure the text spans the full width */
+            text-align: left;
+        }
+
+        /* FAQ Answer Smooth Transition */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            display: none;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .faq-toggle:checked+label+.faq-answer {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        /* Rotate the icon (optional) */
+        .faq-toggle:checked+label svg {
+            transform: rotate(180deg);
+        }
+
+        .faq-toggle+label svg {
+            transition: transform 0.3s ease;
+        }
+
+        label svg {
+            transition: transform 0.3s ease;
+        }
+
+        #about h2{
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+        }
+        #about .bg-lime-400 {
+            width: 90%; /* Reduce width to 90% */
+            max-width: 600px; /* Reduce max-width to 600px */
+            padding: 2rem;
+            margin: 2rem auto;
+        }
+        
+        #about .bg-lime-400 p.text-2xl {
+            font-size: 1.75rem; /* Slightly reduce font size */
+        }
+        
+        #about .bg-lime-400 ul.list-disc {
+            column-count: 2;
+            font-size: 0.9rem; /* Reduce list font size */
+        }
+        
+        #about .bg-lime-400 ul.list-disc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        #about .bg-lime-400 a {
+            padding: 0.6rem 1.2rem; /* Adjust button padding */
+            font-size: 0.9rem; /* Reduce button font size */
+        }
+
+        #results-section {
+            background: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .results-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .results-subtitle {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 40px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            
+        }
+
+        .result-item {
+            background:  linear-gradient(135deg, #06b6d4, #a855f7);
+            /* Dark background for boxes */
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgb(157, 159, 157);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .result-description {
+            font-size: 1rem;
+            color: white;
+        }
+
+        .results-disclaimer {
+            font-size: 0.8rem;
+            color: #888;
+            font-style: italic;
+        }
+
+        /*extra*/
+        .cursor {
+            width: 16px; /* Smaller cursor */
+            height: 16px;
+            background-color: #00cc99; /* Green color */
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform, background-color; /* Performance hint */
+            transition: background-color 0.3s ease; /* Smooth color transition */
+        }
+        
+        .cursor.pulse {
+            animation: smoothPulse 2s infinite ease-in-out;
+        }
+        
+        @keyframes smoothPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                background-color: #00cc99;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.3);
+                background-color: #009973; /* Slightly darker green */
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                background-color: #00cc99;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+    <header>
+        <div class="logo">Beyond Excel</div>
+        <nav>
+            <ul class="menu">
+                <li><a href="#why">Why Beyond Excel</a></li>
+                <li><a href="#results-section">Features</a></li>
+                <li><a href="#about">Tools</a></li>
+                <li><a href="#faqs">FAQs</a></li>
+            </ul>
+        </nav>
+        <a href="1lander.html" class="get-start">Get Started</a>
+    </header>
+
+    <section class="py-12 bg-grey sm:pb-16 lg:pb-20 xl:pb-24">
+        <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+            <div class="relative">
+                <div class="lg:w-2/3">
+                    <p class="text-sm font-normal tracking-widest text-gray-300 uppercase">Excel to PDF, PPT, DOC -
+                        Flawless Conversions, Perfect Formatting</p>
+                        <h1 class="mt-6 text-4xl font-normal text-white sm:mt- 10 sm:text-5xl lg:text-6xl xl:text-8xl"><span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-purple-500 font-VarelaRound">Perfect
+                            Excel</span> Conversions</h1>
+                    <p class="max-w-lg mt-4 text-xl font-normal text-gray-400 sm:mt-8">Preserve your Excel layouts in
+                        PDF, PPT, and DOC effortlessly, without having to worry about security concerns.</p>
+                    <div class="relative inline-flex items-center justify-center mt-8 sm:mt-12 group">
+                        <div
+                            class="absolute transition-all duration-200 rounded-full -inset-px bg-gradient-to-r from-green-500 to-cyan-500 group-hover:shadow-lg group-hover:shadow-yellow-500/50">
+                        </div>
+                        <a href="#about" title=""
+                            class="relative inline-flex items-center justify-center px-8 py-3 text-base font-normal text-white bg-black border border-transparent rounded-full"
+                            role="button"> Start Exploring </a>
+                    </div>
+                </div>
+
+                <div class="mt-8 md:absolute md:mt-0 md:top-32 lg:top-0 md:right-0">
+                    <img class="w-full max-w-xs mx-auto lg:max-w-lg xl:max-w-xl" src="images\mag_doc.png"
+                        alt="Magnifying Glass Over Perfectly Formatted Document" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-us">
+        <div class="container">
+            <h2>Here's why you should trust BEYOND EXCEL</h2><br><br>
+    
+            <section class="feature-row feature-row-1">
+                <div class="feature-image">
+                    <img src="images/work-on-files.png" alt="Work Directly on Your Files">
+                </div>
+                <div class="feature-content">
+                    <h3>File upload made secure</h3>
+                    <p>Do more than just view PDFs. Highlight and add text, images, shapes, and freehand annotations to your documents. You can connect to 30 other tools to enhance your files further.</p>
+                    <a href="#" class="view-pdf-link">Edit a PDF now →</a>
+                </div>
+            </section>
+    
+            <section class="feature-row feature-row-2">
+                <div class="feature-content">
+                    <h3>Digital Signatures Made Easy</h3>
+                    <p>Fill in forms, e-sign contracts, and close deals in a few simple steps. You can also request e-signatures and track your document every step of the way.</p>
+                    <a href="#" class="try-esign-link">Try eSign →</a>
+                </div>
+                <div class="feature-image">
+                    <img src="images/digital-signatures.png" alt="Digital Signatures Made Easy">
+                </div>
+            </section>
+    
+            <section class="feature-row feature-row-3">
+                <div class="feature-image">
+                    <img src="images/perfect-document.png" alt="Create the Perfect Document">
+                </div>
+                <div class="feature-content">
+                    <h3>Create the Perfect Document</h3>
+                    <p>File too big? Compress it. Need a specific format? Convert it. Things getting chaotic? Merge and split files, or remove excess pages. Smallpdf has it all.</p>
+                    <a href="#" class="view-all-tools-link">View all Tools →</a>
+                </div>
+            </section>
+    
+        </div>
+    </section>
+    
+    <section id="results-section">
+        <div class="results-container">
+            <p class="results-subtitle">Features</p>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-value" data-value="37">
+                        <span class="value">Smart</span>
+                    </div>
+                    <p class="result-description">blank</p>
+                </div>
+                <div class="result-item">
+                    <div class="result-value" data-value="22">
+                        <span class="value">Robust</span>
+                    </div>
+                    <p class="result-description">excel to pdf is cool</p>
+                </div>
+                <div class="result-item">
+                    <div class="result-value" data-value="17">
+                        <span class="value">Secure</span>
+                    </div>
+                    <p class="result-description">excel is amazing.</p>
+                </div>
+                <div class="result-item">
+                    <div class="result-value" data-value="-246">
+                        <span class="value">Fast</span>
+                    </div>
+                    <p class="result-description">can we make this happen? </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-12 bg-grey sm:py-16 lg:py-20">
+        <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+            <h2 class="text-2xl text-white sm:text-3xl text-center">Our Tools</h2><br>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-white">
+                    <h2 class="text-3xl font-bold mb-4">EXCEL to PDF</h2>
+                    <p class="text-lg mb-6">Preserve your Excel formatting flawlessly with our accurate Excel to PDF conversion tool.</p>
+                    <p class="text-sm">No software installation needed, convert directly in your browser.</p>
+                </div>
+                <div class="bg-lime-400 rounded-lg p-8">
+                    <p class="text-2xl font-bold text-gray-800 mb-4">Convert your Excel to PDF now</p>
+                    <p class="text-lg font-semibold text-gray-800 mb-2">What's included</p>
+                    <ul class="list-disc list-inside text-gray-800 mb-6">
+                        <li>Smart Formatting</li>
+                        <li>Fast processing</li>
+                        <li>Secure</li>
+                        <li>Robust</li>
+                        <li>Auto Adjust</li>
+                    </ul>
+                    <a href="3EXCEL_PDF.html" class="inline-flex items-center justify-center rounded-full border border-transparent bg-gray-800 px-8 py-3 text-base font-medium text-white hover:bg-gray-700">Convert Document</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="faqs">
+        <section class="py-10 sm:py-16 lg:py-24">
+            <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+                <div class="text-center">
+                    <h2 class="text-3xl leading-tight text-black sm:text-4xl lg:text-5xl">Frequently Asked
+                        Questions</h2>
+                    <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Common Questions & Answers
+                        About Beyond Excel</p>
+                </div>
+
+                <div class="max-w-3xl mx-auto mt-8 space-y-4 md:mt-16">
+                    <div
+                        class="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50">
+                        <input type="checkbox" id="faq1" class="faq-toggle hidden">
+                        <label for="faq1" class="flex items-center w-full px-4 py-5 sm:p-6">
+                            <span class="flex text-lg font-semibold text-black">How does your Excel to PDF conversion
+                                ensure accurate formatting?</span>
+                            <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </label>
+                        <div class="faq-answer px-4 pb-5 sm:px-6 sm:pb-6 hidden">
+                            <p>Unlike other converters, we utilize advanced algorithms for<a
+                                    href="https://developers.deepgram.com/docs/smart-format" title=""
+                                    class="text-blue-600 transition-all duration-200 hover:underline"> smart
+                                    formatting.</a> This preserves your Excel file's original layout, preventing broken
+                                rows, columns, and page breaks, ensuring a perfect PDF conversion.</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="transition-all duration-200 bg-white border border-gray-200 cursor-pointer hover:bg-gray-50">
+                        <input type="checkbox" id="faq2" class="faq-toggle hidden">
+                        <label for="faq2" class="flex items-center w-full px-4 py-5 sm:p-6">
+                            <span class="flex text-lg font-semibold text-black">What makes your Excel to PPT conversion
+                                different from standard converters?</span>
+                            <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </label>
+                        <div class="faq-answer px-4 pb-5 sm:px-6 sm:pb-6 hidden">
+                            <p>Our Excel to PowerPoint conversion goes beyond simple data transfer. We <a
+                                    href="https://aws.amazon.com/what-is/intelligent-document-processing/#:~:text=Intelligent%20document%20processing%20(IDP)%20is,when%20stock%20levels%20are%20low."
+                                    title=""
+                                    class="text-blue-600 transition-all duration-200 hover:underline">intelligently</a>
+                                format your Excel data into visually appealing slides, maintaining the integrity of your
+                                charts, tables, and formatting for professional presentations.</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="transition-all duration-200 bg-white border border-gray-200 cursor-pointer hover:bg-gray-50">
+                        <input type="checkbox" id="faq3" class="faq-toggle hidden">
+                        <label for="faq3" class="flex items-center w-full px-4 py-5 sm:p-6">
+                            <span class="flex text-lg font-semibold text-black">Can your service convert Excel files to
+                                Word documents without losing formatting?</span>
+                            <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </label>
+                        <div class="faq-answer px-4 pb-5 sm:px-6 sm:pb-6 hidden">
+                            <p>Yes. Our <a href="https://hurleywrite.com/Blog/1456/smart-formatting-tips/" title=""
+                                    class="text-blue-600 transition-all duration-200 hover:underline">accurate
+                                    formatting</a> technology accurately translates your Excel spreadsheets into
+                                editable Word documents, preserving the layout and structure you intended.</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="transition-all duration-200 bg-white border border-gray-200 cursor-pointer hover:bg-gray-50">
+                        <input type="checkbox" id="faq4" class="faq-toggle hidden">
+                        <label for="faq4" class="flex items-center w-full px-4 py-5 sm:p-6">
+                            <span class="flex text-lg font-semibold text-black">Does your "smart formatting" feature
+                                handle complex Excel layouts with multiple sheets?</span>
+                            <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </label>
+                        <div class="faq-answer px-4 pb-5 sm:px-6 sm:pb-6 hidden">
+                            <p>Absolutely. Our system is designed to handle <a
+                                    href="https://www.adobe.com/acrobat/hub/tips-to-make-spreadsheets-more-professional.html"
+                                    title="" class="text-blue-600 transition-all duration-200 hover:underline">complex
+                                    Excel files with multiple sheets and intricate formatting</a>, ensuring accurate and
+                                consistent conversions across all formats.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-center text-gray-600 textbase mt-9">Didn’t find the answer you are looking for? <a
+                        href="8customer_support.html" title=""
+                        class="font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline">Contact
+                        our support</a></p>
+            </div>
+        </section>
+    </section>
+
+    <section class="footer">
+        <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl text-white">
+            <div class="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12">
+                <div class="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
+                    <p class="text-xl font-bold">BEYOND EXCEL</p>
+                    <p class="text-base leading-relaxed text-gray-300 mt-7">Convert files easily and efficiently without
+                        compromising on quality.</p>
+                    <ul class="social-icons">
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-facebook-f icon"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-twitter icon"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-linkedin-in icon"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-google-plus-g icon"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold tracking-widest text-gray-400 uppercase">Company</p>
+                    <ul class="mt-6 space-y-4">
+                        <li><a href="6about.html" class="text-base text-white hover:text-green-400">About</a></li>
+                        <li><a href="#features" class="text-base text-white hover:text-green-400">Features</a></li>
+                        <li><a href="7works.html" class="text-base text-white hover:text-green-400">Works</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold tracking-widest text-gray-400 uppercase">Help</p>
+                    <ul class="mt-6 space-y-4">
+                        <li><a href="8customer_support.html" class="text-base text-white hover:text-green-400">Customer
+                                Support</a></li>
+                        <li><a href="9T&C.html" class="text-base text-white hover:text-green-400">Terms & Conditions</a>
+                        </li>
+                        <li><a href="10Privacy_Policy.html" class="text-base text-white hover:text-green-400">Privacy
+                                Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-1 lg:col-span-2 lg:pl-8">
+                    <p class="text-sm font-semibold tracking-widest text-gray-400 uppercase">Subscribe to Newsletter</p>
+                    <form action="#" method="POST" class="mt-6">
+                        <input type="email" placeholder="Enter your email" class="subscribe-input">
+                        <button type="submit" class="subscribe-button mt-3">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-16 mb-10" />
+            <p class="text-sm text-center text-gray-400">© Copyright 2025, All Rights Reserved</p>
+        </div>
+    </section>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"></button>
+    <script>
+        // Get the button:
+        let mybutton = document.getElementById("myBtn");
+
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        mybutton.onclick = function () { topFunction() };
+
+        function topFunction() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Smooth scrolling!
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const faqs = document.querySelectorAll(".faq-toggle");
+
+            faqs.forEach((faq) => {
+                faq.addEventListener("change", function () {
+                    const answer = this.parentElement.querySelector(".faq-answer");
+                    const icon = this.parentElement.querySelector("svg");
+
+                    if (this.checked) {
+                        // Fade In
+                        answer.style.display = "block"; // Ensure it's visible before animation starts
+                        setTimeout(() => {
+                            answer.style.maxHeight = answer.scrollHeight + "px";
+                            answer.style.opacity = "1";
+                            answer.style.transform = "translateY(0)";
+                        }, 10);
+                        icon.style.transform = "rotate(180deg)";
+                    } else {
+                        // Fade Out
+                        answer.style.maxHeight = "0";
+                        answer.style.opacity = "0";
+                        answer.style.transform = "translateY(-10px)";
+                        icon.style.transform = "rotate(0deg)";
+
+                        // Delay `display: none` until after animation completes
+                        setTimeout(() => {
+                            if (!faq.checked) {
+                                answer.style.display = "none";
+                            }
+                        }, 500); // Matches CSS transition duration
+                    }
+                });
+            });
+        });
+        /*extra*/
+        const cursor = document.querySelector('.cursor');
+
+        function updateCursorPosition(e) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        }
+        
+        function onMouseMove(e) {
+            requestAnimationFrame(() => updateCursorPosition(e));
+        }
+        
+        document.addEventListener('mousemove', onMouseMove);
+        
+        // Add pulse class on hover
+        document.addEventListener('mouseenter', () => {
+            cursor.classList.add('pulse');
+        });
+        
+        // Remove pulse class on mouse leave
+        document.addEventListener('mouseleave', () => {
+            cursor.classList.remove('pulse');
+        });
+    </script>
+</body>
+
+</html>
