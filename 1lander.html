@@ -35,7 +35,7 @@
             outline: none;
             cursor: pointer;
             display: none;
-            /* Hidden by default */
+            
         }
 
         #myBtn::before {
@@ -73,7 +73,7 @@
         body {
             width: 100%; 
             height: 100%;
-            background: radial-gradient(circle at center, rgb(43, 40, 40), #180c04  ); ;
+            background: #fcf7f7;
             font-family: 'Montserrat', sans-serif;
             --x: 0; /*extra*/
             --y: 0; /*extra*/
@@ -93,8 +93,8 @@
         }
 
         .logo {
-            color: #fff;
-            font-size: 24px;
+            color: #9a0001;
+            font-size: 26px;
             margin-left: -120px;
             margin-right: 150px;
             font-family: "Montserrat", sans-serif;
@@ -121,7 +121,7 @@
 
         nav ul li a {
             font-size: 22px;
-            color: #777;
+            color: #9a0001;
             text-decoration: none;
             transition: all 0.45s;
             display: block;
@@ -129,6 +129,8 @@
             height: 100%;
             line-height: 50px;
             padding: 0 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
             /* Add padding to nav links */
         }
 
@@ -138,7 +140,7 @@
         }
 
         nav ul li:hover a {
-            color: #39e75f;
+            color: #9a0001;
         }
 
         nav ul li:not(:last-child) {
@@ -152,7 +154,7 @@
         }
 
         .get-start {
-            background: linear-gradient(135deg, #06b6d4, #a855f7);
+            background: #9a0001;
             color: white;
             border: none;
             font-weight: bolder;
@@ -185,13 +187,13 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .trust-us h2 {
             font-size: 2.5em;
             margin-bottom: 60px; /* Increased margin below title */
-            color: white;
+            color: #9a0001;
             font-family: "Montserrat", sans-serif;
-            font-weight: 800;
+            font-weight: 700;
         }
         
         .feature-row {
@@ -212,9 +214,9 @@
         }
         
         .feature-image img {
-            width: 400px;
+            width: 350px;
             height: auto;
-            border-radius: 8px;
+            border-radius: 30px;
             display: block;
         }
         
@@ -222,7 +224,7 @@
             flex: 1;
             font-size: 1.1em;
             line-height: 2.0;
-            color: white;
+            color: #9a0001;
         }
         
         .feature-content h3 {
@@ -277,8 +279,8 @@
         }
         
         .footer .social-icons li a {
-            width: 40px; /* Reduced width for better fit */
-            height: 40px; /* Reduced height for better fit */
+            width: 60px; /* Reduced width for better fit */
+            height: 60px; /* Reduced height for better fit */
             line-height: 40px; /* Adjusted line-height to match height */
             font-size: 20px; /* Reduced font-size for better fit */
             display: flex; /* Use flexbox for centering */
@@ -344,7 +346,7 @@
         }
 
         .subscribe-button {
-            background: #39e75f;
+            background: linear-gradient(135deg, #06b6d4, #a855f7);
             color: black;
             padding: 12px 20px;
             border-radius: 8px;
@@ -361,8 +363,8 @@
 
         #faqs h2{
             font-family: 'Montserrat', sans-serif;
-            color: white;
-            font-weight: 900;
+            color: #9a0001;
+            font-weight: 700;
         }
 
         /* Custom CSS for FAQ Toggle (Tailwind CSS Structure) */
@@ -415,7 +417,7 @@
 
         #about h2{
             font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
+            font-weight: 700;
         }
         #about .bg-lime-400 {
             width: 90%; /* Reduce width to 90% */
@@ -460,9 +462,10 @@
         }
 
         .results-subtitle {
-            font-size: 2.5rem;
-            font-weight: 900;
+            font-size: 2.25rem;
+            font-weight: 700;
             margin-bottom: 40px;
+            color: #9a0001;
         }
 
         .results-grid {
@@ -474,7 +477,7 @@
         }
 
         .result-item {
-            background:  linear-gradient(135deg, #06b6d4, #a855f7);
+            background: #9a0001;
             /* Dark background for boxes */
             color: white;
             padding: 30px;
@@ -485,7 +488,7 @@
 
         .result-value {
             font-size: 3rem;
-            font-weight: bold;
+            font-weight: medium;
             margin-bottom: 10px;
         }
 
@@ -502,10 +505,10 @@
 
         /*extra*/
         .cursor {
-            width: 16px; /* Smaller cursor */
-            height: 16px;
-            background-color: #00cc99; /* Green color */
-            border-radius: 50%;
+            width: 30px; /* Smaller cursor */
+            height: 30px;
+            background: white; /* Green color */
+            border-radius: 70%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
@@ -520,17 +523,17 @@
         @keyframes smoothPulse {
             0% {
                 transform: translate(-50%, -50%) scale(1);
-                background-color: #00cc99;
+                background-color: rgb(236, 203, 203);
             }
             50% {
                 transform: translate(-50%, -50%) scale(1.3);
-                background-color: #009973; /* Slightly darker green */
+                background-color: brown; /* Slightly darker green */
             }
             100% {
                 transform: translate(-50%, -50%) scale(1);
-                background-color: #00cc99;
+                background-color: lightcoral
             }
-        }
+        }    
     </style>
 </head>
 
@@ -540,7 +543,7 @@
         <div class="logo">Beyond Excel</div>
         <nav>
             <ul class="menu">
-                <li><a href="#why">Why Beyond Excel</a></li>
+                <li><a href="#trust-us">About</a></li>
                 <li><a href="#results-section">Features</a></li>
                 <li><a href="#about">Tools</a></li>
                 <li><a href="#faqs">FAQs</a></li>
@@ -553,19 +556,19 @@
         <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div class="relative">
                 <div class="lg:w-2/3">
-                    <p class="text-sm font-normal tracking-widest text-gray-300 uppercase">Excel to PDF, PPT, DOC -
+                    <p class="text-sm font-bold tracking-widest text-black uppercase">Excel to PDF, PPT, DOC -
                         Flawless Conversions, Perfect Formatting</p>
-                        <h1 class="mt-6 text-4xl font-normal text-white sm:mt- 10 sm:text-5xl lg:text-6xl xl:text-8xl"><span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-purple-500 font-VarelaRound">Perfect
-                            Excel</span> Conversions</h1>
-                    <p class="max-w-lg mt-4 text-xl font-normal text-gray-400 sm:mt-8">Preserve your Excel layouts in
+                        <h1 style="color: #9a0001;" class="mt-6 text-4xl font-medium sm:mt-10 sm:text-5xl lg:text-6xl xl:text-8xl">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#9a0001] to-[#9a0001] font-VarelaRound">Perfect Excel</span> Conversions
+                          </h1>
+                    <p class="max-w-lg mt-4 text-xl font-medium text-black sm:mt-8">Preserve your Excel layouts in
                         PDF, PPT, and DOC effortlessly, without having to worry about security concerns.</p>
                     <div class="relative inline-flex items-center justify-center mt-8 sm:mt-12 group">
                         <div
-                            class="absolute transition-all duration-200 rounded-full -inset-px bg-gradient-to-r from-green-500 to-cyan-500 group-hover:shadow-lg group-hover:shadow-yellow-500/50">
+                            class="absolute transition-all duration-200 rounded-full -inset-px bg-gradient-to-r from-cyan-500 to-purple-500 group-hover:shadow-lg group-hover:shadow-lime-500/50">
                         </div>
                         <a href="#about" title=""
-                            class="relative inline-flex items-center justify-center px-8 py-3 text-base font-normal text-white bg-black border border-transparent rounded-full"
+                            class="relative inline-flex items-center justify-center px-8 py-3 text-base font-normal text-white bg-[#9a0001] border border-transparent rounded-full"
                             role="button"> Start Exploring </a>
                     </div>
                 </div>
@@ -578,16 +581,17 @@
         </div>
     </section>
 
+    <section id="trust-us">
     <section class="trust-us">
         <div class="container">
             <h2>Here's why you should trust BEYOND EXCEL</h2><br><br>
     
             <section class="feature-row feature-row-1">
                 <div class="feature-image">
-                    <img src="images/work-on-files.png" alt="Work Directly on Your Files">
+                    <img src="images\merge_docs.png" alt="Work Directly on Your Files">   
                 </div>
                 <div class="feature-content">
-                    <h3>File upload made secure</h3>
+                    <h3>File uploads made secure</h3>
                     <p>Do more than just view PDFs. Highlight and add text, images, shapes, and freehand annotations to your documents. You can connect to 30 other tools to enhance your files further.</p>
                     <a href="#" class="view-pdf-link">Edit a PDF now →</a>
                 </div>
@@ -600,13 +604,13 @@
                     <a href="#" class="try-esign-link">Try eSign →</a>
                 </div>
                 <div class="feature-image">
-                    <img src="images/digital-signatures.png" alt="Digital Signatures Made Easy">
+                    <img src="images/smart_format.png" alt="Digital Signatures Made Easy">
                 </div>
             </section>
     
             <section class="feature-row feature-row-3">
                 <div class="feature-image">
-                    <img src="images/perfect-document.png" alt="Create the Perfect Document">
+                    <img src="images/column_break.png" alt="Create the Perfect Document">
                 </div>
                 <div class="feature-content">
                     <h3>Create the Perfect Document</h3>
@@ -614,10 +618,10 @@
                     <a href="#" class="view-all-tools-link">View all Tools →</a>
                 </div>
             </section>
-    
         </div>
     </section>
-    
+</section>
+
     <section id="results-section">
         <div class="results-container">
             <p class="results-subtitle">Features</p>
@@ -652,24 +656,24 @@
 
     <section id="about" class="py-12 bg-grey sm:py-16 lg:py-20">
         <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-            <h2 class="text-2xl text-white sm:text-3xl text-center">Our Tools</h2><br>
+            <h2 class="text-3xl text-[#9a0001] sm:text-4xl text-center">Our Tools</h2><br>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div class="text-white">
-                    <h2 class="text-3xl font-bold mb-4">EXCEL to PDF</h2>
-                    <p class="text-lg mb-6">Preserve your Excel formatting flawlessly with our accurate Excel to PDF conversion tool.</p>
-                    <p class="text-sm">No software installation needed, convert directly in your browser.</p>
+                    <h2 class="text-3xl font-bold mb-4 text-[#9a0001]">EXCEL to PDF</h2>
+                    <p class="text-lg mb-6 text-[#9a0001]">Preserve your Excel formatting flawlessly with our accurate Excel to PDF conversion tool.</p>
+                    <p class="text-sm text-[#9a0001]">No software installation needed, convert directly in your browser.</p>
                 </div>
-                <div class="bg-lime-400 rounded-lg p-8">
-                    <p class="text-2xl font-bold text-gray-800 mb-4">Convert your Excel to PDF now</p>
-                    <p class="text-lg font-semibold text-gray-800 mb-2">What's included</p>
-                    <ul class="list-disc list-inside text-gray-800 mb-6">
+                <div class="rounded-lg p-8" style="background: #9a0001">
+                    <p class="text-2xl font-bold text-white mb-4">Convert your Excel to PDF now</p>
+                    <p class="text-lg font-semibold text-white mb-2">What's included</p>
+                    <ul class="list-disc list-inside text-white mb-6">
                         <li>Smart Formatting</li>
                         <li>Fast processing</li>
                         <li>Secure</li>
                         <li>Robust</li>
                         <li>Auto Adjust</li>
                     </ul>
-                    <a href="3EXCEL_PDF.html" class="inline-flex items-center justify-center rounded-full border border-transparent bg-gray-800 px-8 py-3 text-base font-medium text-white hover:bg-gray-700">Convert Document</a>
+                    <a href="3EXCEL_PDF.html" class="inline-flex items-center justify-center rounded-full border border-transparent bg-[#fcf7f7] px-8 py-3 text-base font-bold text-black hover:bg-gray-700">Convert Document</a>
                 </div>
             </div>
         </div>
@@ -680,9 +684,9 @@
         <section class="py-10 sm:py-16 lg:py-24">
             <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
                 <div class="text-center">
-                    <h2 class="text-3xl leading-tight text-black sm:text-4xl lg:text-5xl">Frequently Asked
+                    <h2 class="text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">Frequently Asked
                         Questions</h2>
-                    <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Common Questions & Answers
+                    <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-black">Common Questions & Answers
                         About Beyond Excel</p>
                 </div>
 
@@ -772,10 +776,10 @@
                     </div>
                 </div>
 
-                <p class="text-center text-gray-600 textbase mt-9">Didn’t find the answer you are looking for? <a
-                        href="8customer_support.html" title=""
+                <p class="text-center text-white textbase mt-9">Didn't find the answer you are looking for? <a
+                        href="8contact_us.html" title=""
                         class="font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline">Contact
-                        our support</a></p>
+                        Us</a></p>
             </div>
         </section>
     </section>
@@ -821,7 +825,7 @@
                 <div>
                     <p class="text-sm font-semibold tracking-widest text-gray-400 uppercase">Help</p>
                     <ul class="mt-6 space-y-4">
-                        <li><a href="8customer_support.html" class="text-base text-white hover:text-green-400">Customer
+                        <li><a href="8contact_us.html" class="text-base text-white hover:text-green-400">Customer
                                 Support</a></li>
                         <li><a href="9T&C.html" class="text-base text-white hover:text-green-400">Terms & Conditions</a>
                         </li>
